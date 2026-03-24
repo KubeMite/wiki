@@ -1,7 +1,7 @@
 [[main]]
   pre = "github"
   name = "GitHub"
-  url = "https://github.com/yahav2305/wiki"
+  url = "https://github.com/KubeMite/wiki"
   weight = 1
 
 [[main]]
