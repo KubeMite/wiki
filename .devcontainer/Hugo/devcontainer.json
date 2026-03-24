@@ -1,0 +1,35 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/go
+{
+	"name": "Hugo",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"build": {
+    	"dockerfile": "Dockerfile"
+	},
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {},
+		"ghcr.io/devcontainers/features/hugo:1": {
+			"extended": true,
+			"version": "0.158.0"
+		}
+	},
+
+	"forwardPorts": [
+		1313
+	],
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"budparr.language-hugo-vscode",
+				"christian-kohler.path-intellisense",
+				"Gruntfuggly.todo-tree",
+				"nhoizey.gremlins",
+				"shardulm94.trailing-spaces"
+			]
+		}
+	},
+	"postCreateCommand": "hugo completion bash > /etc/bash_completion.d/hugo"
+}
