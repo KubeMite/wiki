@@ -4,7 +4,6 @@ ARG HUGO_VERSION="0.157.0"
 ARG TARGETARCH
 
 # Install Hugo
-# hadolint ignore=DL3059
 RUN apk add --no-cache curl=~8 libc6-compat=~1 libstdc++=~15
 RUN /bin/ash -eo pipefail -c "if [ "$TARGETARCH" = "arm64" ]; then ARCH="arm64"; else ARCH="amd64"; fi && \
     curl -fsSL -O https://github.com/gohugoio/hugo/releases/download/v"$HUGO_VERSION"/hugo_extended_"$HUGO_VERSION"_linux-"$ARCH".tar.gz && \
