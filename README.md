@@ -8,6 +8,3 @@ For visitors seeking to understand DevOps concepts and practices, I hope you fin
 For recruiters reviewing my resume or LinkedIn profile, I trust this site effectively showcases my expertise and capabilities.
 
 For info about how I hosted this website check out the **Homelab** subject in the website itself.
-
-More details, including architectural decisions, future plans, and pending issues can be found in the following files:
-- [Adding pages to the wiki](docs/adding-pages.md)
