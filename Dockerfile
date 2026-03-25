@@ -1,4 +1,4 @@
-FROM alpine:3 AS build
+FROM alpine:3.23 AS hugo-build
 
 ARG HUGO_VERSION="0.157.0"
 ARG TARGETARCH
@@ -16,10 +16,10 @@ SHELL [ "/bin/ash" , "-c"]
 
 COPY . /app
 WORKDIR /app
-RUN hugo
+RUN hugo --minify
 
 FROM nginxinc/nginx-unprivileged:1.29-alpine-slim
 
-COPY --from=build /app/public /usr/share/nginx/html
+COPY --from=hugo-build /app/public /usr/share/nginx/html
 
 EXPOSE 8080/tcp
