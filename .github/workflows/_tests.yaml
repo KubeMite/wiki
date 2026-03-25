@@ -1,0 +1,37 @@
+name: CI Tests
+
+on:
+  workflow_call:
+
+jobs:
+
+  test-hugo:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3.0.0
+        with:
+          hugo-version: '0.157.0'
+          extended: true
+
+      - name: Test site build
+        run: hugo --minify
+
+  test-dockerfile:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.3.0
+        with:
+          dockerfile: Dockerfile
+          failure-threshold: warning
