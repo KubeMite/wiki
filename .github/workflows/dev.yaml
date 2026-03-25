@@ -9,4 +9,5 @@ jobs:
 
   run-tests:
     uses: ./.github/workflows/_tests.yaml
-    permissions: {}
+    permissions:
+      contents: read

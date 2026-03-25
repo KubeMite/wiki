@@ -11,7 +11,8 @@ jobs:
 
   run-tests:
     uses: ./.github/workflows/_tests.yaml
-    permissions: {}
+    permissions:
+      contents: read
 
   build-push-dockerfile:
     runs-on: ubuntu-22.04
