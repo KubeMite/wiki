@@ -9,10 +9,13 @@ jobs:
 
   run-tests:
     uses: ./.github/workflows/_tests.yaml
+    permissions: {}
 
   dry-build-dockerfile:
     runs-on: ubuntu-22.04
     needs: run-tests
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout Repo
