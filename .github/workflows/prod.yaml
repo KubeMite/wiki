@@ -15,6 +15,9 @@ jobs:
   build-push-dockerfile:
     runs-on: ubuntu-22.04
     needs: run-tests
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - name: Checkout Repo
