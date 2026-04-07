@@ -12,7 +12,7 @@ jobs:
     permissions:
       contents: read
 
-  build-push-dockerfile:
+  build-push-docker:
     runs-on: ubuntu-22.04
     needs: run-tests
     permissions:
@@ -31,7 +31,7 @@ jobs:
         with:
           images: ghcr.io/KubeMite/wiki
           tags: |
-            type=sha,format=long
+            type=raw,value=sha-${{ github.event.pull_request.head.sha }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
