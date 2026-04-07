@@ -44,8 +44,8 @@ jobs:
           echo "Mapping PR Image (sha-$PR_HEAD_SHA) to Main Commit (sha-${{ github.sha }})"
 
           # Link the PR image to the NEW squash commit hash
-          crane tag ghcr.io/KubeMite/wiki:sha-$PR_HEAD_SHA sha-${{ github.sha }}
-          crane tag ghcr.io/KubeMite/wiki:sha-$PR_HEAD_SHA latest
+          crane tag ghcr.io/kubemite/wiki:sha-$PR_HEAD_SHA sha-${{ github.sha }}
+          crane tag ghcr.io/kubemite/wiki:sha-$PR_HEAD_SHA latest
 
       - name: Tagging
         if: startsWith(github.ref, 'refs/tags/')
