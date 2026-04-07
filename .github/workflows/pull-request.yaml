@@ -29,7 +29,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ghcr.io/KubeMite/wiki
+          images: ghcr.io/kubemite/wiki
           tags: |
             type=raw,value=sha-${{ github.event.pull_request.head.sha }}
 
