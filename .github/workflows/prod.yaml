@@ -54,4 +54,4 @@ jobs:
           TARGET_SHA="sha-${{ github.sha }}"
 
           echo "Promoting $TARGET_SHA to $TAG_NAME"
-          crane tag ghcr.io/KubeMite/wiki:$TARGET_SHA "$TAG_NAME"
+          crane tag ghcr.io/kubemite/wiki:$TARGET_SHA "$TAG_NAME"
