@@ -34,7 +34,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Find the PR that was just merged into this commit
-          PR_HEAD_SHA=$(gh pr list --commit ${{ github.sha }} --state merged --json headRefOid --jq '.[0].headRefOid')
+          PR_HEAD_SHA=$(gh api repos/kubemite/wiki/commits/${{ github.sha }}/pulls | jq -r '.[0].head.sha')
 
           if [ -z "$PR_HEAD_SHA" ]; then
             echo "No merged PR found for this commit"
