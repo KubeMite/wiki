@@ -7,8 +7,8 @@ WORKDIR /project
 COPY . /project
 RUN hugo --minify
 
-FROM nginxinc/nginx-unprivileged:1.29-alpine-slim
+FROM ghcr.io/static-web-server/static-web-server:2.42
 
-COPY --from=hugo-build /project/public /usr/share/nginx/html
+COPY --from=hugo-build /project/public /public
 
-EXPOSE 8080/tcp
+EXPOSE 80/tcp
