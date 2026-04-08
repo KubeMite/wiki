@@ -40,36 +40,74 @@ jobs:
           dockerfile: Dockerfile
           failure-threshold: warning
 
+
+  build-push-docker-image:
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: true
+
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@030e881283bb7a6894de51c315a6bfe6a94e05cf # v6.0.0
+        with:
+          images: ghcr.io/kubemite/wiki
+          tags: |
+            type=raw,value=sha-${{ github.sha }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@ce360397dd3f832beb865e1373c09c0e9f86d70a # v4.0.0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & Push
+        uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294 #v7.0.0
+        with:
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          push: true
+          sbom: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
   test-docker-image:
     runs-on: ubuntu-24.04
+
+    needs: build-push-docker-image
 
     permissions:
       contents: read
       security-events: write
 
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
-
-      - name: Build Docker Image
-        uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294 #v7.0.0
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@030e881283bb7a6894de51c315a6bfe6a94e05cf # v6.0.0
         with:
-          platforms: linux/amd64
-          load: true
-          tags: local/docker-image
-          push: false
-          sbom: false
-          provenance: false
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          images: ghcr.io/kubemite/wiki
+          tags: |
+            type=raw,value=sha-${{ github.sha }}
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 #v0.35.0
         with:
-          image-ref: local/docker-image
+          image-ref: ${{ steps.meta.outputs.tags }}
           format: sarif
           output: trivy-results.sarif
 
@@ -82,32 +120,24 @@ jobs:
   website-security-testing:
     runs-on: ubuntu-24.04
 
+    needs: build-push-docker-image
+
     permissions:
       contents: read
       issues: write
 
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
-
-      - name: Build Docker Image
-        uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294 #v7.0.0
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@030e881283bb7a6894de51c315a6bfe6a94e05cf # v6.0.0
         with:
-          platforms: linux/amd64
-          load: true
-          tags: local/docker-image
-          push: false
-          sbom: false
-          provenance: false
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          images: ghcr.io/kubemite/wiki
+          tags: |
+            type=raw,value=sha-${{ github.sha }}
 
       - name: Run website
         run: |
-          docker run -p 8080:80 --name website -d local/docker-image
+          docker run -p 8080:80 --name website -d ${{ steps.meta.outputs.tags }}
           timeout 60s bash -c 'until curl -sS -f http://localhost:8080; do sleep 2; done'
 
       - name: ZAP Scan
