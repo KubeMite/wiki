@@ -108,7 +108,7 @@ jobs:
       - name: Run website
         run: |
           docker run -p 8080:80 --name website -d local/docker-image
-          timeout 60s bash -c 'until curl -f http://localhost:8080; do sleep 2; done'
+          timeout 60s bash -c 'until curl -sS -f http://localhost:8080; do sleep 2; done'
 
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.13.0
