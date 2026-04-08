@@ -13,3 +13,4 @@ jobs:
       contents: read
       issues: write
       security-events: write
+      packages: write
