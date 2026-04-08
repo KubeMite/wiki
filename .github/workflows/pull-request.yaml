@@ -34,7 +34,7 @@ jobs:
         with:
           images: ghcr.io/kubemite/wiki
           tags: |
-            type=raw,value=sha-${{ github.event.pull_request.head.sha }}
+            type=raw,value=sha-${{ github.sha }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@ce360397dd3f832beb865e1373c09c0e9f86d70a # v4.0.0
