@@ -111,11 +111,12 @@ jobs:
           timeout 60s bash -c 'until curl -sS -f http://localhost:8080; do sleep 2; done'
 
       - name: ZAP Scan
-        uses: zaproxy/action-full-scan@v0.13.0
+        uses: zaproxy/action-baseline@v0.15.0
         id: zap-scan
         with:
           target: http://localhost:8080
           token: ${{ secrets.GITHUB_TOKEN }}
+          fail_action: true
         continue-on-error: true
 
       - name: Upload ZAP Report
