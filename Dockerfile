@@ -12,4 +12,9 @@ FROM ghcr.io/static-web-server/static-web-server:${STATIC_WEB_SERVER_VERSION}
 
 COPY --from=hugo-build /project/public /public
 
+ENV SERVER_HTTP2_TLS=true
+ENV SERVER_SECURITY_HEADERS=true
+ENV SERVER_METRICS=true
+ENV SERVER_HEALTH=true
+
 EXPOSE 80/tcp
