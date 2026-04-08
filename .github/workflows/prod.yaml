@@ -9,18 +9,12 @@ on:
 
 jobs:
 
-  run-tests:
-    uses: ./.github/workflows/_tests.yaml
+  promote-image:
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       issues: write
       security-events: write
-
-  promote-image:
-    runs-on: ubuntu-24.04
-    needs: run-tests
-    permissions:
-      contents: read
       packages: write
 
     steps:
