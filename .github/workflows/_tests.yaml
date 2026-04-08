@@ -60,7 +60,8 @@ jobs:
           load: true
           tags: local/docker-image
           push: false
-          sbom: true
+          sbom: false
+          provenance: false
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -104,7 +105,8 @@ jobs:
           load: true
           tags: local/docker-image
           push: false
-          sbom: true
+          sbom: false
+          provenance: false
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
