@@ -11,9 +11,11 @@ jobs:
     uses: ./.github/workflows/_tests.yaml
     permissions:
       contents: read
+      issues: write
+      security-events: write
 
   build-push-docker:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: run-tests
     permissions:
       contents: read
