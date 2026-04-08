@@ -11,3 +11,4 @@ jobs:
     uses: ./.github/workflows/_tests.yaml
     permissions:
       contents: read
+      issues: write
