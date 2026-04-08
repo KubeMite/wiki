@@ -1,0 +1,17 @@
+[general]
+security-headers = true
+metrics = true
+health = true
+
+[advanced]
+
+[[advanced.headers]]
+source = "*"
+[advanced.headers.headers]
+Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+Cross-Origin-Embedder-Policy = "require-corp"
+Cross-Origin-Opener-Policy = "same-origin"
+Cross-Origin-Resource-Policy = "same-origin"
+
+Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; form-action 'self'; frame-ancestors 'none';"

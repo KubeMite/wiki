@@ -116,4 +116,5 @@ jobs:
         with:
           target: http://localhost:8080
           token: ${{ secrets.GITHUB_TOKEN }}
+          rules_file_name: ./.github/workflows/.zap/rules.tsv
           fail_action: true
