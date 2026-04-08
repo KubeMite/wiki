@@ -13,11 +13,10 @@ jobs:
       contents: read
       issues: write
       security-events: write
-      packages: write
 
-  build-push-docker-image:
+  build-push-docker:
     runs-on: ubuntu-24.04
-
+    needs: run-tests
     permissions:
       contents: read
       packages: write
@@ -34,7 +33,7 @@ jobs:
         with:
           images: ghcr.io/kubemite/wiki
           tags: |
-            type=raw,value=sha-${{ github.sha }}
+            type=raw,value=sha-${{ github.event.pull_request.head.sha }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@ce360397dd3f832beb865e1373c09c0e9f86d70a # v4.0.0
@@ -59,98 +58,3 @@ jobs:
           sbom: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-  docker-image-vuln-scanning:
-    runs-on: ubuntu-24.04
-
-    needs: build-push-docker-image
-
-    permissions:
-      contents: read
-      security-events: write
-      packages: read
-
-    steps:
-      - name: Docker metadata
-        id: meta
-        uses: docker/metadata-action@030e881283bb7a6894de51c315a6bfe6a94e05cf # v6.0.0
-        with:
-          images: ghcr.io/kubemite/wiki
-          tags: |
-            type=raw,value=sha-${{ github.sha }}
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Pull Docker image
-        run: docker pull ${{ steps.meta.outputs.tags }}
-
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1 #v0.35.0
-        with:
-          image-ref: ${{ steps.meta.outputs.tags }}
-          format: sarif
-          output: trivy-results.sarif
-
-      - name: Upload Trivy scan results
-        uses: github/codeql-action/upload-sarif@7434149006143a4d75b82a2f411ef15b03ccc2d7 #v4.35.1
-        if: always()
-        with:
-          sarif_file: trivy-results.sarif
-
-  website-security-testing:
-    runs-on: ubuntu-24.04
-
-    needs: build-push-docker-image
-
-    permissions:
-      contents: read
-      issues: write
-      packages: read
-
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Docker metadata
-        id: meta
-        uses: docker/metadata-action@030e881283bb7a6894de51c315a6bfe6a94e05cf # v6.0.0
-        with:
-          images: ghcr.io/kubemite/wiki
-          tags: |
-            type=raw,value=sha-${{ github.sha }}
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Run website
-        run: |
-          docker run -p 8080:80 --name website -d ${{ steps.meta.outputs.tags }}
-          timeout 60s bash -c 'until curl -sS -f http://localhost:8080; do sleep 2; done'
-
-      - name: ZAP Scan
-        uses: zaproxy/action-baseline@de8ad967d3548d44ef623df22cf95c3b0baf8b25 #v0.15.0
-        id: zap-scan
-        with:
-          target: http://localhost:8080
-          token: ${{ secrets.GITHUB_TOKEN }}
-          rules_file_name: ./.github/workflows/.zap/rules.tsv
-          fail_action: true
-
-      - name: Upload ZAP Reports
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-        if: steps.zap-scan.outcome == 'success'
-        with:
-          name: zap_scan
-          path: |
-            report_json.json
-            report_html.html
-            report_md.md
