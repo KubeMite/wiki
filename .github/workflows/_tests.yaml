@@ -117,17 +117,3 @@ jobs:
           target: http://localhost:8080
           token: ${{ secrets.GITHUB_TOKEN }}
           fail_action: true
-        continue-on-error: true
-
-      - name: Upload ZAP Report
-        uses: actions/upload-artifact@v4
-        if: steps.zap-scan.outcome == 'failure'
-        with:
-          name: zap-scan-report
-          path: report_html.html
-
-      - name: Fail if ZAP scan failed
-        if: steps.zap-scan.outcome == 'failure'
-        run: |
-          echo "ZAP scan found vulnerabilities. Check the uploaded artifact report."
-          exit 1
