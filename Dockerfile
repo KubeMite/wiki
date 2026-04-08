@@ -11,6 +11,6 @@ RUN hugo --minify
 FROM ghcr.io/static-web-server/static-web-server:${STATIC_WEB_SERVER_VERSION}
 
 COPY --from=hugo-build /project/public /public
-COPY static-web-server-config.toml /sws.toml
+#COPY static-web-server-config.toml /sws.toml
 
 EXPOSE 80/tcp
