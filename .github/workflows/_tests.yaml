@@ -94,6 +94,7 @@ jobs:
     permissions:
       contents: read
       security-events: write
+      packages: write
 
     steps:
       - name: Docker metadata
@@ -125,6 +126,7 @@ jobs:
     permissions:
       contents: read
       issues: write
+      packages: write
 
     steps:
       - name: Docker metadata
