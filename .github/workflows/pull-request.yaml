@@ -76,7 +76,7 @@ jobs:
         with:
           images: ghcr.io/kubemite/wiki
           tags: |
-            type=raw,value=sha-${{ github.sha }}
+            type=raw,value=sha-${{ github.event.pull_request.head.sha }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
@@ -121,7 +121,7 @@ jobs:
         with:
           images: ghcr.io/kubemite/wiki
           tags: |
-            type=raw,value=sha-${{ github.sha }}
+            type=raw,value=sha-${{ github.event.pull_request.head.sha }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
