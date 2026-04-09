@@ -23,7 +23,9 @@ jobs:
           extended: true
 
       - name: Test site build
-        run: hugo --minify
+        run: |
+          cd docker
+          hugo --minify
 
   test-dockerfile:
     runs-on: ubuntu-24.04
@@ -37,5 +39,5 @@ jobs:
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@2332a7b74a6de0dda2e2221d575162eba76ba5e5 # v3.3.0
         with:
-          dockerfile: Dockerfile
+          dockerfile: ./docker/Dockerfile
           failure-threshold: warning
