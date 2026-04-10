@@ -1,5 +1,5 @@
 theme = "blowfish"
-baseURL = "https://yahavdeutsch.com/"
+baseURL = "https://yahav.me/"
 defaultContentLanguage = "en"
 
 enableRobotsTXT = true
