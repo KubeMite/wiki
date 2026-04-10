@@ -211,4 +211,4 @@ jobs:
 
       - name: Install helm chart
         run: |
-          helm install wiki ghcr.io/kubemite/wiki-helm:0.0.0-${{ github.event.pull_request.head.sha }} --set image.tag=${{ github.event.pull_request.head.sha }} --wait
+          helm install wiki oci://ghcr.io/kubemite/wiki-helm:0.0.0-${{ github.event.pull_request.head.sha }} --set image.tag=${{ github.event.pull_request.head.sha }} --wait
