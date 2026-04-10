@@ -51,3 +51,42 @@ jobs:
 
           echo "Promoting $TARGET_SHA to $TAG_NAME"
           crane tag ghcr.io/kubemite/wiki:$TARGET_SHA "$TAG_NAME"
+
+  build-push-helm-chart:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Helm tool installer
+        uses: Azure/setup-helm@dda3372f752e03dde6b3237bc9431cdc2f7a02a2 # v5.0.0
+        with:
+          version: v4.1.4
+
+      - name: Login to ghcr
+        run: |
+          helm registry login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build helm chart - merge to main
+        if: github.ref == 'refs/heads/main'
+        run: |
+          helm package ./helm/wiki-helm --version 0.0.0-${{ github.sha }} --app-version 0.0.0-${{ github.sha }}
+
+      - name: Build helm chart - tagging
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          helm package ./helm/wiki-helm --version ${{ github.ref_name }} --app-version ${{ github.ref_name }}
+
+      - name: Push helm chart - merge to main
+        if: github.ref == 'refs/heads/main'
+        run: |
+          helm push wiki-helm-0.0.0-${{ github.sha }}.tgz oci://ghcr.io/kubemite
+
+      - name: Push helm chart - tagging
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          helm push wiki-helm-${{ github.ref_name }}.tgz oci://ghcr.io/kubemite

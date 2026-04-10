@@ -1,0 +1,7 @@
+apiVersion: v2
+appVersion: "1.16.0"
+description: A Helm chart for deploying the wiki website of Yahav Deutsch
+kubeVersion: ">=1.35.0-0"
+name: wiki-helm
+type: application
+version: 0.1.0
