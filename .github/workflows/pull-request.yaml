@@ -154,3 +154,61 @@ jobs:
             report_json.json
             report_html.html
             report_md.md
+
+  build-push-helm-chart:
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Helm tool installer
+        uses: Azure/setup-helm@dda3372f752e03dde6b3237bc9431cdc2f7a02a2 # v5.0.0
+        with:
+          version: v4.1.4
+
+      - name: Login to ghcr
+        run: |
+          helm registry login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build helm chart
+        run: |
+          helm package ./helm/wiki-helm --version 0.0.0-${{ github.event.pull_request.head.sha }} --app-version 0.0.0-${{ github.event.pull_request.head.sha }}
+
+      - name: Push helm chart
+        run: |
+          helm push wiki-helm-0.0.0-${{ github.event.pull_request.head.sha }}.tgz oci://ghcr.io/kubemite
+
+  helm-chart-testing:
+    runs-on: ubuntu-24.04
+
+    needs:
+      - build-push-docker-image
+      - build-push-helm-chart
+
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Helm tool installer
+        uses: Azure/setup-helm@dda3372f752e03dde6b3237bc9431cdc2f7a02a2 # v5.0.0
+        with:
+          version: v4.1.4
+
+      - name: Kind Cluster
+        uses: helm/kind-action@ef37e7f390d99f746eb8b610417061a60e82a6cc # v1.14.0
+        with:
+          version: v0.31.0
+          kubectl_version: v1.35.0
+
+      - name: Install helm chart
+        run: |
+          helm install wiki ghcr.io/kubemite/wiki-helm:0.0.0-${{ github.event.pull_request.head.sha }} --set image.tag=${{ github.event.pull_request.head.sha }} --wait
