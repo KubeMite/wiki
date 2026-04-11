@@ -67,17 +67,18 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           repository: kubemite/wiki-helm
-          fetch-depth: 0
 
       - name: Get Latest Tag
-        uses: WyriHaximus/github-action-get-previous-tag@61819f33034117e6c686e6a31dba995a85afc9de # v2.0.0
         id: latest-tag
+        run: |
+          latest_tag=$(git tag --sort=-v:refname | head -n 1)
+          echo "latest_tag=$latest_tag" >> $GITHUB_OUTPUT
 
       - name: Next SemVers
         uses: WyriHaximus/github-action-next-semvers@18aa9ed4152808ab99b88d71f5481e41f8d89930 # v1.2.1
         id: semvers
         with:
-          version: ${{ steps.latest-tag.outputs.tag }}
+          version: ${{ steps.latest-tag.outputs.latest_tag }}
 
       - name: Update helm chart to new docker version
         run: |
