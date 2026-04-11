@@ -69,6 +69,7 @@ jobs:
           repository: kubemite/wiki-helm
           fetch-depth: 0
           fetch-tags: true
+          token: ${{ secrets.HELM_REPO_WRITE }}
 
       - name: Get Latest Tag
         id: latest-tag
