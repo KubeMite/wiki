@@ -72,6 +72,7 @@ jobs:
         id: latest-tag
         run: |
           latest_tag=$(git tag --sort=-v:refname | head -n 1)
+          echo found latest tag "$latest_tag"
           echo "latest_tag=$latest_tag" >> $GITHUB_OUTPUT
 
       - name: Next SemVers
