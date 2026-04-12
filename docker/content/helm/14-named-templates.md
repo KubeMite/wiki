@@ -19,7 +19,7 @@ metadata:
     app.kubernetes.io/instance: nginx
 spec:
   selector:
-    matchLabels: 
+    matchLabels:
       app.kubernetes.io/name: nginx
       app.kubernetes.io/instance: nginx
   template:
@@ -29,7 +29,7 @@ spec:
         app.kubernetes.io/instance: nginx
   spec:
     containers:
-    - name: nginx 
+    - name: nginx
 	  image: "nginx:1.16.0"
       imagePullPolicy: IfNotPresent
       ports:
@@ -60,7 +60,7 @@ spec:
 To reduce duplication, extract the repeated lines into a separate file named `_helpers.tpl`:
 `_helpers.tpl`:
 ```yaml
-{{- define "labels" }}	
+{{- define "labels" }}
     app.kubernetes.io/name: {{ .Release.Name }}
     app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
@@ -88,7 +88,7 @@ spec:
     app: hello-world
 ```
 # Scope Management
-The `_helpers.tpl` file doesn’t inherently have access to any scope. You need to pass the necessary scope when including the named template using:
+The `_helpers.tpl` file doesn't inherently have access to any scope. You need to pass the necessary scope when including the named template using:
 ```yaml
 {{- template "<template-name>" <scope> }}
 ```
@@ -104,7 +104,7 @@ metadata:
     {{- include "labels" . }}
 spec:
   selector:
-    matchLabels: 
+    matchLabels:
       {{- include "labels" . | indent 2 }}
   template:
     metadata:
@@ -112,7 +112,7 @@ spec:
         {{- include "labels" . | indent 4 }}
     spec:
       containers:
-      - name: nginx 
+      - name: nginx
         image: "nginx:1.16.0"
         imagePullPolicy: IfNotPresent
         ports:

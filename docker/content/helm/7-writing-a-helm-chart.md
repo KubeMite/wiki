@@ -50,7 +50,7 @@ This guide outlines the steps to create a basic Helm chart for deploying a simpl
 	  ports:
 		- port: 80
 		  targetPort: http
-		  protocol: TCP   
+		  protocol: TCP
 	  selector:
 		app: {{ .Release.Name }}-hello-world
 	```

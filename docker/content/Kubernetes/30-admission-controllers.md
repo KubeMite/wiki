@@ -11,15 +11,15 @@ Admission controllers in Kubernetes are pieces of code that intercept API reques
 1. **AlwaysPullImages**:
    - Ensures that Kubernetes always pulls container images when creating a pod, enforcing the use of the latest image.
 2. **DefaultStorageClass**:
-   - Automatically assigns a default storage class to PersistentVolumeClaims (PVCs) that don’t specify one, facilitating storage provisioning.
+   - Automatically assigns a default storage class to PersistentVolumeClaims (PVCs) that don't specify one, facilitating storage provisioning.
 3. **EventRateLimit**:
    - Controls the rate of events that the Kubernetes API server can process, helping to protect the server from being overwhelmed.
 4. **NameSpaceExists** (Deprecated):
-   - Ensures that resources are only created in namespaces that already exist. For example, if you try to create a pod in a non-existent namespace (`kubectl run nginx --image nginx --namespace blue`), it will return an error: `Error from server (NotFound): namespace “blue” not found.`
+   - Ensures that resources are only created in namespaces that already exist. For example, if you try to create a pod in a non-existent namespace (`kubectl run nginx --image nginx --namespace blue`), it will return an error: `Error from server (NotFound): namespace "blue" not found.`
 5. **NameSpaceAutoProvision** (Deprecated):
-   - Automatically creates a namespace if a request is made to create resources in a namespace that doesn’t exist.
+   - Automatically creates a namespace if a request is made to create resources in a namespace that doesn't exist.
 6. **NameSpaceLifeCycle**:
-   - This is the recommended replacement for both `NameSpaceExists` and `NameSpaceAutoProvision`. It handles the lifecycle of namespaces, such as ensuring that resources aren’t created in namespaces that are terminating.
+   - This is the recommended replacement for both `NameSpaceExists` and `NameSpaceAutoProvision`. It handles the lifecycle of namespaces, such as ensuring that resources aren't created in namespaces that are terminating.
 # Viewing and Configuring Admission Controllers
 You can view the active admission controllers by running the following command:
 ```sh
@@ -39,7 +39,7 @@ spec:
   - command:
     - kube-apiserver
     - --authorization-mode=Node,RBAC
-    - --advertise-address=172.17.0.107 
+    - --advertise-address=172.17.0.107
     - --allow-privileged=true
     - --enable-bootstrap-token-auth=true
     - --enable-admission-plugins=NodeRestriction,NamespaceAutoProvision
@@ -65,7 +65,7 @@ Kubernetes admission controllers are divided into two main types: **mutating** a
 ## Types of Admission Controllers
 **Mutating Admission Controllers:** Mutating admission controllers can modify or alter the objects related to the request they admit. They can automatically add, remove, or modify fields in the object specifications before they are persisted.
 - **Example**:
-  - **DefaultStorageClass**: Automatically assigns a storage class to any new PersistentVolumeClaim (PVC) that doesn’t specify one, ensuring a default storage option is used.
+  - **DefaultStorageClass**: Automatically assigns a storage class to any new PersistentVolumeClaim (PVC) that doesn't specify one, ensuring a default storage option is used.
 **Validating Admission Controllers:** Validating admission controllers either accept or reject requests based on whether the requests meet certain conditions or policies. They do not modify the requests but ensure that the requests are valid according to predefined rules.
 - **Example**:
   - **NameSpaceExists**: Ensures that the request is accepted only if the specified namespace already exists. If not, it rejects the request.

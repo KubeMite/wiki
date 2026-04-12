@@ -26,7 +26,7 @@ spec:
   persistentVolumeReclaimPolicy: Recycle  # Reclaim policy: Retain, Delete, Recycle
 ```
 - **`capacity`**: Specifies the storage size.
-- **`hostPath`**: This example uses a `hostPath` volume, which mounts a directory from the host node’s filesystem into the PV.
+- **`hostPath`**: This example uses a `hostPath` volume, which mounts a directory from the host node's filesystem into the PV.
 ## accessModes
 accessModes defines how the PV can be accessed. The common modes are:
 - **ReadWriteOnce**: The volume can be mounted as read-write by a single node. Multiple pods running on the same node can still access the PV.
@@ -80,5 +80,5 @@ spec:
     persistentVolumeClaim:
       claimName: myclaim  # Reference to the PVC
 ```
-- **`volumeMounts`**: This section defines where in the container’s filesystem the PVC will be mounted.
+- **`volumeMounts`**: This section defines where in the container's filesystem the PVC will be mounted.
 - **`volumes.persistentVolumeClaim.claimName`**: Refers to the PVC that was previously created.

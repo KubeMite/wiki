@@ -30,7 +30,7 @@ spec:
 # Define the volume and map it to a directory on the host
   volumes:
   - name: data-volume
-    hostPath: 
+    hostPath:
       path: /data
       type: Directory
 ```

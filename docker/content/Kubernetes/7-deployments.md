@@ -17,23 +17,23 @@ Here's a breakdown of key deployment concepts:
 # kubectl Commands for Deployments
 
 - **Viewing Deployment History:**
-    
+
     - `kubectl rollout history deployment/<deployment-name>`
 		- This command displays the history of versions deployed for a specific deployment named `<deployment-name>`.
 - **Rollback to Previous Version:**
-    
+
     - `kubectl rollout undo deployment/<deployment-name>`
 	    - This command attempts to rollback the deployment to the previous version.
 - **Rollback to Specific Version:**
-    
+
     - `kubectl rollout undo deployment/<deployment-name> --to-revision=<revision-number>`
 	    - This command allows you to rollback to a specific version identified by its revision number.
 - **Scaling Deployments:**
-    
+
     - `kubectl scale deployment/<deployment-name> --replicas=<number>`
 	    - This command allows you to adjust the desired number of replicas for a deployment.
 - **Pausing/Resuming Rollouts:**
-    
+
     - `kubectl rollout pause deployment/<deployment-name>`
 	    - This command pauses an ongoing rollout of a deployment.
     - `kubectl rollout resume deployment/<deployment-name>`

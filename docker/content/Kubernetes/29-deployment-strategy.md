@@ -10,7 +10,7 @@ When deploying new versions of an application, different strategies can be emplo
 # Blue-Green Deployment
 Blue-Green deployment involves maintaining two identical environments: a "blue" environment (the current production) and a "green" environment (the staging environment for the new version). The green environment is used to deploy and test the new version of the application. Once it is confirmed that the new version is functioning correctly, traffic is switched from the blue environment to the green environment, making green the new production environment.
 ## Steps for Blue-Green Deployment
-1. **Deploy the New Version**: 
+1. **Deploy the New Version**:
    - Create a new deployment for the green environment, specifying a unique label to differentiate it from the blue (current production) deployment.
     ```yaml
     apiVersion: apps/v1
@@ -33,9 +33,9 @@ Blue-Green deployment involves maintaining two identical environments: a "blue" 
           - name: myapp
             image: myapp:v2  # New version
     ```
-2. **Test the New Deployment**: 
+2. **Test the New Deployment**:
    - Run tests on the green environment to ensure that the new version is working correctly.
-3. **Switch Traffic**: 
+3. **Switch Traffic**:
    - Update the service that routes traffic to the application to point to the green environment instead of the blue environment by changing the selector in the service definition.
     ```yaml
     apiVersion: v1
@@ -59,7 +59,7 @@ Blue-Green deployment involves maintaining two identical environments: a "blue" 
 ## Considerations
 - Requires double the infrastructure during deployment.
 # Canary Deployment
-Canary deployment allows you to release a new version to a small subset of users or traffic. It’s a gradual rollout strategy where you start by directing a small percentage of traffic to the new version (canary) while the rest continues to go to the old version. If the canary version performs well, it is gradually rolled out to more users until it fully replaces the old version.
+Canary deployment allows you to release a new version to a small subset of users or traffic. It's a gradual rollout strategy where you start by directing a small percentage of traffic to the new version (canary) while the rest continues to go to the old version. If the canary version performs well, it is gradually rolled out to more users until it fully replaces the old version.
 ## Steps for Canary Deployment
 1. **Deploy the New Version**:
    - Create a new deployment for the canary version with just one pod to start with.
