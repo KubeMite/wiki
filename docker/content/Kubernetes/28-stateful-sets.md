@@ -60,7 +60,7 @@ Explanation:
 - **`podManagementPolicy: OrderedReady`**: Ensures that pods are created and deleted sequentially. The next pod is created only after the previous one is fully ready.
 - **`volumeClaimTemplates`**: Defines the storage requirements for each pod. Each pod gets its own PersistentVolume with 1Gi of storage, ensuring that data is retained across pod restarts.
 Notes:
-- When a pod in a stateful set is destroyed, its persistent volume isn’t destroyed. The persistent volume will wait for its pod to come back.
+- When a pod in a stateful set is destroyed, its persistent volume isn't destroyed. The persistent volume will wait for its pod to come back.
 # Headless Service
 A headless service is required to manage the DNS entries for the StatefulSet pods. This service allows each pod to be addressed individually (e.g., `mysql-0.mysql-h.<namespace>.svc.cluster.local`, `mysql-1.mysql-h.<namespace>.svc.cluster.local`).
 ## Headless Service YAML Example

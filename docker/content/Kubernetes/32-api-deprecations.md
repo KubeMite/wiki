@@ -9,7 +9,7 @@ series_order: 32
 The Kubernetes API's evolution is governed by strict rules to ensure backward compatibility, stability, and seamless transitions between versions. These rules allow the API to grow and adapt while minimizing disruption to existing systems.
 # API Groups and Versioning Tracks
 Kubernetes APIs are divided into **API groups**, each independently versioned and following one of three main tracks:
-- **GA (Generally Available, Stable)**: 
+- **GA (Generally Available, Stable)**:
 	- Version format: `v1`, `v2`, etc.
 	- This track represents stable and production-ready features.
 - **Beta (Pre-release)**:

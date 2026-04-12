@@ -27,4 +27,4 @@ spec:
     size: Large
 ```
 ## Notes
-- To define that a certain pod won’t be able to use a specific node or that a certain pod will be able to use multiple nodes with multiple labels, use node affinity instead of node selectors.
+- To define that a certain pod won't be able to use a specific node or that a certain pod will be able to use multiple nodes with multiple labels, use node affinity instead of node selectors.

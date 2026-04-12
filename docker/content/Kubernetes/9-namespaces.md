@@ -11,7 +11,7 @@ Separates objects for security and minimizes human error.
 # Same namespace communication
 Objects in the same namespace can call each other with their hostname, for example:
 ```sql
-mysql.connect(”db-service”)
+mysql.connect("db-service")
 ```
 # Different namespaces communication
 Objects in different namespaces can call each other with their full name, for example:

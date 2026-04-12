@@ -10,7 +10,7 @@ Kubernetes API versions are a crucial part of managing the lifecycle and stabili
 # API Version Levels
 ## Alpha
 - **Version Naming**: Includes `alpha` (e.g., `v1alpha1`).
-- **Stability:** 
+- **Stability:**
 	- High risk of bugs and instability.
 	- Features may be incomplete and are often disabled by default.
 - **Support:**
@@ -28,7 +28,7 @@ Kubernetes API versions are a crucial part of managing the lifecycle and stabili
 	- Not fully recommended for production, but may be used if you can manage potential migrations or schema changes.
 ## Stable
 - **Version Naming**: Uses the format `vX`, where `X` is a version number (e.g., `v1`, `v2`).
-- **Stability:** 
+- **Stability:**
 	- The most stable and reliable version level.
 	- Features have been thoroughly tested and used in many production environments.
 - **Support:**
@@ -36,5 +36,5 @@ Kubernetes API versions are a crucial part of managing the lifecycle and stabili
 	- Backward-incompatible changes are avoided, ensuring long-term stability.
 # Preferred/Storage Version
 - **Preferred Version**: Among multiple supported API versions, one is designated as the "preferred" version, which is the default when using commands like `kubectl get` or `kubectl explain`.
-- **Storage Version**: Objects stored in Kubernetes are saved using this version. If an object is retrieved that doesn’t match the storage version, it will be automatically converted to this version.
+- **Storage Version**: Objects stored in Kubernetes are saved using this version. If an object is retrieved that doesn't match the storage version, it will be automatically converted to this version.
 - **Importance**: Ensures consistency and ease of management, as the preferred/storage version is the default interface for most operations.

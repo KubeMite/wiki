@@ -34,6 +34,6 @@ spec:
 - **Exists**: True if the key exists in the node.
 - **DoesNotExist**: True if no label with this key exists on the node.
 # Node Affinity Values
-- **requiredDuringSchedulingIgnoredDuringExecution**: The pod won’t use the node if the conditions don’t fit.
-- **preferredDuringSchedulingIgnoredDuringExecution**: The pod will try not to use the node if the conditions don’t fit, but will use the node if there is no other option that works.
-- When a pod is already using a node, changing the label won’t affect it because of the `IgnoredDuringExecution` part.
+- **requiredDuringSchedulingIgnoredDuringExecution**: The pod won't use the node if the conditions don't fit.
+- **preferredDuringSchedulingIgnoredDuringExecution**: The pod will try not to use the node if the conditions don't fit, but will use the node if there is no other option that works.
+- When a pod is already using a node, changing the label won't affect it because of the `IgnoredDuringExecution` part.
