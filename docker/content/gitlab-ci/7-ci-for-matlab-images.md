@@ -86,4 +86,4 @@ Downsides:
 
 - No isolation between the container that creates the standalone application to the host since we are writing the standalone application to the host.
 - No isolation between the container that creates the Matlab docker image to the host since we are mounting the Docker socket from the host to the Docker container (I tried [Kaniko](https://github.com/GoogleContainerTools/kaniko), it doesn't work for Matlab).
-- The current CI/CD can't run on Kubernetes since we write the information to the host and use the host Docker socket. (Maybe with some alteration the CI/CD can work on Kubernetes and use the local node container runtime socker).
+- The current CI/CD can't run on Kubernetes since we write the information to the host and use the host Docker socket. (Maybe with some alteration the CI/CD can work on Kubernetes and use the local node container runtime socket).

@@ -6,19 +6,27 @@ series: ["Helm"]
 series_order: 3
 ---
 Helm charts are packaged Kubernetes applications that simplify the deployment and management of applications within a Kubernetes cluster. They provide a way to bundle all the necessary Kubernetes resources into a single package, making it easier to deploy, upgrade, and manage applications.
-# Helm Chart Structure
+
+## Helm Chart Structure
+
 A typical Helm chart directory structure includes:
+
 - **`templates/` (directory):** Contains Kubernetes manifest files (in YAML format) that define the resources to be created. These files use Go templating to dynamically generate the manifests based on the values provided.
 - **`values.yaml` (file):** Contains default configuration values for the chart. Users can override these values during chart installation or upgrades.
 - **`Chart.yaml` (file):** Contains metadata about the chart.
 - **`LICENSE` (file):** (Optional) License information for the chart.
 - **`README.md` (file):** (Optional) Documentation for the chart, providing information on usage, configuration, and installation.
 - **`charts/` (directory):** (Optional) Contains dependent charts that are required by the main chart. This directory is used to package dependencies.
-# `values.yaml`
+
+## `values.yaml`
+
 - **Purpose:** This file provides default configuration values for the templates within the chart. Users can override these values when installing or upgrading the chart to customize the deployment.
 - **Usage:** Values from `values.yaml` are used in the templates to generate Kubernetes manifest files. This allows you to parameterize configurations without modifying the templates themselves.
-# `Chart.yaml`
+
+## `Chart.yaml`
+
 This file contains metadata about the Helm chart. Here's an explanation of its fields:
+
 ```yaml
 apiVersion: v2
 appVersion: 5.8.1
@@ -41,7 +49,9 @@ maintainers:
 home: https://github.com/bitnami/charts/tree/main/bitnami/mariadb
 icon: https://bitnami.com/assets/stacks/mariadb/img/mariadb-stack-220x234.png
 ```
+
 Fields Explained:
+
 - **apiVersion:** Indicates the version of the Helm chart API. Helm 3 charts use `v2`, whereas Helm 2 charts use `v1` or may omit this field.
 - **appVersion:** Specifies the version of the application contained within the chart.
 - **version:** The version of the Helm chart itself. This helps track changes to the chart independently of the application version.

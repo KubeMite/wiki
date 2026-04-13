@@ -7,7 +7,7 @@ series_order: 4
 ---
 
 The tasks in the CI/CD pipeline are configured as jobs
-In Gitlab CI each pipeline one or more jobs, and each job runs in a seperate environment from any other job, and contains multiple steps
+In Gitlab CI each pipeline one or more jobs, and each job runs in a separate environment from any other job, and contains multiple steps
 
 ## Job syntax
 
@@ -50,7 +50,7 @@ build_image:
   variables:
     IMAGE_NAME: my-image/image
     IMAGE_TAG: python-app-1.0
-    # In order for the docker client and daemon to communicate, they must share certificates. This insctructs the docker containers to share certificates in the same place.
+    # In order for the docker client and daemon to communicate, they must share certificates. This instructs the docker containers to share certificates in the same place.
     DOCKER_TLS_CERTDIR: "/certs"
 
   # We use dind (Docker in Docker) to build our image

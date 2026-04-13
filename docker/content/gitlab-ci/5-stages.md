@@ -49,7 +49,7 @@ build_image:
 
   # Variables will store values that can be reused in the pipeline
   variables:
-    # In order for the docker client and daemon to communicate, they must share certificates. This insctructs the docker containers to share certificates in the same place.
+    # In order for the docker client and daemon to communicate, they must share certificates. This instructs the docker containers to share certificates in the same place.
     DOCKER_TLS_CERTDIR: "/certs"
 
   # We use dind (Docker in Docker) to build our image
@@ -75,7 +75,7 @@ deploy:
   # Defines which stage this job is a part of
   stage: deploy
 
-  # Ensures only we can access the ssh key, otherwise the key will be cosidered insecure and ssh will not work
+  # Ensures only we can access the ssh key, otherwise the key will be considered insecure and ssh will not work
   before_script:
     - chmod 400 $SSH_KEY
 
