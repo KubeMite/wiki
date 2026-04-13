@@ -28,8 +28,15 @@
 				"Gruntfuggly.todo-tree",
 				"nhoizey.gremlins",
 				"shardulm94.trailing-spaces",
-				"DavidAnson.vscode-markdownlint"
-			]
+				"DavidAnson.vscode-markdownlint",
+				"streetsidesoftware.code-spell-checker"
+			],
+			"settings": {
+				"cSpell.enabledFileTypes": {
+					"*": false,
+					"markdown": true
+				}
+			}
 		}
 	},
 	"postCreateCommand": "hugo completion bash > /etc/bash_completion.d/hugo"
