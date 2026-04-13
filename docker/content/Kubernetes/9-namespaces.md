@@ -7,22 +7,33 @@ series_order: 9
 ---
 
 Separates objects for security and minimizes human error.
+
 - **Default namespace**: Called `default`.
-# Same namespace communication
+
+## Same namespace communication
+
 Objects in the same namespace can call each other with their hostname, for example:
+
 ```sql
 mysql.connect("db-service")
 ```
-# Different namespaces communication
+
+## Different namespaces communication
+
 Objects in different namespaces can call each other with their full name, for example:
+
 ```sql
 mysql.connect("db-service.dev.svc.cluster.local")
 ```
+
 Syntax for full name:
-```
+
+```text
 [service-name].[namespace].svc.cluster.local
 ```
-# `kubectl` Namespace Commands
+
+## `kubectl` Namespace Commands
+
 | Command                                                                                     | Description                                                                          |
 | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | `kubectl get <resource>`                                                                    | Displays resource in current namespace                                               |
@@ -33,14 +44,17 @@ Syntax for full name:
 | `kubectl create -f resource-definition.yaml --namespace=<namespace>`                        | Creates resource in specified namespace                                              |
 | `kubectl create namespace <namespace-name>`                                                 | Create a namespace                                                                   |
 
-# Creating a Namespace Using a Definition File
+## Creating a Namespace Using a Definition File
+
 ```yaml
 apiVersion: v1
 kind: Namespace
 metadata:
   name: dev
 ```
-# Specifying the Namespace in an Object Definition File
+
+## Specifying the Namespace in an Object Definition File
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -54,8 +68,11 @@ spec:
     ports:
     - containerPort: 80
 ```
-# Resource Quota for a namespace
+
+## Resource Quota for a Namespace
+
 We can set a resource quota for a namespace, which limits the quantity of objects that can be created in a namespace by type, as well as the total amount of compute resources that may be consumed by resources in that namespace.
+
 ```yaml
 apiVersion: v1
 kind: ResourceQuota

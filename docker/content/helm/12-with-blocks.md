@@ -6,9 +6,12 @@ series: ["Helm"]
 series_order: 12
 ---
 Scope allows us easier access to a set of values from a `values.yaml` file.
-# Understanding Scope
+
+## Understanding Scope
+
 In Helm templates, everything starts at the **root scope**. If no specific scope is set, the template assumes we are in the root scope, which is why we need to traverse all the way from the root to access nested values.
 Given a `values.yaml` file with the following nested dictionary:
+
 ```yaml
 app:
   ui:
@@ -18,7 +21,9 @@ app:
     name: "users"
     conn: "mongodb://localhost:27020/mydb"
 ```
+
 We can set the following `configmap.yaml` file:
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -30,8 +35,11 @@ data:
   database: {{ .Values.app.db.name }}
   connection: {{ .Values.app.db.conn }}
 ```
-# Using the `with` Block to Set Scope
+
+## Using the `with` Block to Set Scope
+
 To avoid unnecessary traversal, you can set a scope using the `with` block:
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -49,10 +57,14 @@ data:
     {{- end }}
   {{- end }}
 ```
+
 - The `with` block sets a new scope, making it easier to access nested values without repetitive traversal.
 - Scopes can be nested within each other as demonstrated.
-# Accessing Values Outside the Current Scope
+
+## Accessing Values Outside the Current Scope
+
 If you need to refer to a value outside of the current scope, use the `$` sign:
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -71,4 +83,5 @@ data:
   release: {{ $.Release.Name }}
   {{- end }}
 ```
+
 - Here, `{{ $.Release.Name }}` refers to the `Release.Name` from the root scope, even within the nested `with` blocks.

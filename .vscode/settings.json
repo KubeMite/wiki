@@ -1,0 +1,37 @@
+{
+  "cSpell.ignoreWords": [
+    "Kaniko",
+    "demartis"
+  ],
+  "cSpell.words": [
+    "apiserver",
+    "appinfo",
+    "automount",
+    "Bitnami",
+    "CERTDIR",
+    "configmap",
+    "Deutsch",
+    "dind",
+    "Homelab",
+    "Hyperthread",
+    "kibibytes",
+    "kubeconfig",
+    "kubelet",
+    "mydb",
+    "mypublickey",
+    "newyork",
+    "nginy",
+    "regioninfo",
+    "replicaset",
+    "replicasets",
+    "Seccomp",
+    "secring",
+    "serviceaccount",
+    "shuf",
+    "storageclass",
+    "tolerations",
+    "untar",
+    "xignn",
+    "Yahav"
+  ]
+}
