@@ -8,12 +8,23 @@ series_order: 10
 
 Used to store environment variables in a separate, callable file, making them more convenient than specifying them each time.
 ConfigMaps store environment variables as key-value pairs.
-### `kubectl` Commands
-| Command                                                                   | Description                                                                                                                 |
-| ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `kubectl create configmap <configmap-name> --from-literal=<key>=<value>`  | Create configmap using the specified name, key, and value. `--from-literal` can be used multiple times for multiple values. |
-| `kubectl create configmap <configmap-name> --from-file=config.properties` | Create configmap using the specified name and data from the specified file.                                                 |
-# ConfigMap Yaml Definition File
+
+## `kubectl` Commands
+
+```sh
+kubectl create configmap <configmap-name> --from-literal=<key>=<value>
+```
+
+- Create configmap using the specified name, key, and value. `--from-literal` can be used multiple times for multiple values.
+
+```sh
+kubectl create configmap <configmap-name> --from-file=config.properties
+```
+
+- Create configmap using the specified name and data from the specified file.
+
+## ConfigMap Yaml Definition File
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -23,9 +34,13 @@ data:
   APP_COLOR: blue
   APP_MODE: prod
 ```
-# Injecting ConfigMap data into containers
+
+## Injecting ConfigMap data into containers
+
 There are multiple ways to inject data from a configMap into a container.
-## Injecting all key-value pairs in a configMap as container environment variables
+
+### Injecting all key-value pairs in a configMap as container environment variables
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -39,7 +54,9 @@ spec:
     - configMapRef:
         name: special-config
 ```
-## Injecting specific key-value pairs in a configMap as container environment variables
+
+### Injecting specific key-value pairs in a configMap as container environment variables
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -52,13 +69,15 @@ spec:
       env:
       - name: ENV-KEY-NAME
         valueFrom:
-			configMapKeyRef:
-	            # The ConfigMap containing the value you want to assign to ENV-KEY-NAME
-	            name: CONFIGMAP-NAME
-	            # Specify the key from the configmap
-	            key: KEY-NAME
+      configMapKeyRef:
+              # The ConfigMap containing the value you want to assign to ENV-KEY-NAME
+              name: CONFIGMAP-NAME
+              # Specify the key from the configmap
+              key: KEY-NAME
 ```
-## Injecting configMap as a file into container
+
+### Injecting configMap as a file into container
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -69,8 +88,8 @@ spec:
     - name: nginx
       image: nginx
       volumeMounts:
-	  - name: config-volume
-		mountPath: /etc/config
+    - name: config-volume
+    mountPath: /etc/config
   volumes:
     - name: config-volume
       configMap:
