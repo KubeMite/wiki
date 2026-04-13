@@ -27,3 +27,8 @@
   name = "Helm"
   parent = "Subjects"
   pageRef = "helm/"
+
+[[main]]
+  name = "Gitlab-CI"
+  parent = "Subjects"
+  pageRef = "gitlab-ci/"
