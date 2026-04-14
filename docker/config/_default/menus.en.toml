@@ -32,3 +32,8 @@
   name = "Gitlab-CI"
   parent = "Subjects"
   pageRef = "gitlab-ci/"
+
+[[main]]
+  name = "K3S"
+  parent = "Subjects"
+  pageRef = "k3s/"
