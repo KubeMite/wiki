@@ -2,3 +2,6 @@
 10055	IGNORE	Required for JS
 10049	IGNORE	Website doesnt contain cookies or sensitive content
 10109	IGNORE	Not using Ajax spider
+2	IGNORE	http://localhost:8080/diagrams/.*
+2	IGNORE	http://localhost:8080/health
+2	IGNORE	http://localhost:8080/metrics
