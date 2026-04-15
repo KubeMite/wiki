@@ -42,3 +42,8 @@
   name = "K3S"
   parent = "Subjects"
   pageRef = "k3s/"
+
+[[main]]
+  name = "Laptop Setup"
+  parent = "Subjects"
+  pageRef = "laptop-setup/"
