@@ -47,3 +47,8 @@
   name = "Laptop Setup"
   parent = "Subjects"
   pageRef = "laptop-setup/"
+
+[[main]]
+  name = "Docker"
+  parent = "Subjects"
+  pageRef = "docker/"
