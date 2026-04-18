@@ -57,3 +57,8 @@
   name = "Matlab"
   parent = "Subjects"
   pageRef = "matlab/"
+
+[[main]]
+  name = "Github Actions"
+  parent = "Subjects"
+  pageRef = "github-actions/"
