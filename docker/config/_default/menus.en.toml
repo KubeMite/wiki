@@ -62,3 +62,8 @@
   name = "Github Actions"
   parent = "Subjects"
   pageRef = "github-actions/"
+
+[[main]]
+  name = "Terraform"
+  parent = "Subjects"
+  pageRef = "terraform/"
