@@ -67,3 +67,8 @@
   name = "Terraform"
   parent = "Subjects"
   pageRef = "terraform/"
+
+[[main]]
+  name = "Argo-CD"
+  parent = "Subjects"
+  pageRef = "argo-cd/"
