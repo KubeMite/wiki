@@ -196,3 +196,11 @@ Mac App Store command-line interface
 ```sh
 brew install mas
 ```
+
+## [MonitorControl](https://github.com/MonitorControl/MonitorControl)
+
+Controls external display brightness
+
+```sh
+brew install --cask monitorcontrol
+```
