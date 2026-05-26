@@ -126,12 +126,12 @@ Interactive process viewer
 brew install htop
 ```
 
-## [DockDoor](https://dockdoor.net/)
+## [alt-tab](https://alt-tab.app/)
 
-Open-source private windows-like alt-tab alternative
+Windows-like alt-tab
 
 ```sh
-brew install --cask dockdoor
+brew install --cask alt-tab
 ```
 
 ## [Ice](https://icemenubar.app/)
