@@ -33,13 +33,15 @@ jobs:
           ATTEMPT=1
           PR_HEAD_SHA=""
 
+          repo="$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')"
+
           echo "Fetching PR associated with commit ${{ github.sha }}..."
 
           while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
             echo "Attempt $ATTEMPT of $MAX_ATTEMPTS..."
 
             # Find the PR that was just merged into this commit
-            PR_HEAD_SHA=$(gh api repos/${{ github.repository }}/commits/${{ github.sha }}/pulls | jq -r '.[0].head.sha')
+            PR_HEAD_SHA=$(gh api repos/"$repo"/commits/${{ github.sha }}/pulls | jq -r '.[0].head.sha')
 
             if [ -n "$PR_HEAD_SHA" ] && [ "$PR_HEAD_SHA" != "null" ]; then
               echo "Successfully found PR head SHA after $ATTEMPT attempt(s)."
@@ -59,8 +61,8 @@ jobs:
           echo "Mapping PR Image (sha-$PR_HEAD_SHA) to Main Commit (sha-${{ github.sha }})"
 
           # Link the PR image to the NEW squash commit hash
-          crane tag ghcr.io/${{ github.repository }}:sha-$PR_HEAD_SHA sha-${{ github.sha }}
-          crane tag ghcr.io/${{ github.repository }}:sha-$PR_HEAD_SHA latest
+          crane tag ghcr.io/"$repo":sha-$PR_HEAD_SHA sha-${{ github.sha }}
+          crane tag ghcr.io/"$repo":sha-$PR_HEAD_SHA latest
 
       - name: Tagging
         if: startsWith(github.ref, 'refs/tags/')
