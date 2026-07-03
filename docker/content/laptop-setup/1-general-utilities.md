@@ -204,3 +204,11 @@ Controls external display brightness
 ```sh
 brew install --cask monitorcontrol
 ```
+
+## [LocalSend](https://localsend.org/)
+
+Send files wirelessly, securely, and privately
+
+```sh
+brew install --cask localsend
+```
