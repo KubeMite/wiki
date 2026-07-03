@@ -42,6 +42,16 @@ plugins=(
 )
 ```
 
+## K9S
+
+TUI for Kubernetes cluster interaction.
+
+Install:
+
+```sh
+brew install derailed/k9s/k9s
+```
+
 ### [KubeColor](https://kubecolor.github.io/)
 
 Get colored output for kubectl commands
