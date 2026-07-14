@@ -212,3 +212,17 @@ Send files wirelessly, securely, and privately
 ```sh
 brew install --cask localsend
 ```
+
+## [WhatCable](https://github.com/darrylmorley/whatcable)
+
+Displays USB-C cable info for cables plugged into the Mac device.
+
+```sh
+brew install --cask darrylmorley/whatcable/whatcable
+```
+
+Then disable the pro hint at the end of plain text output of the CLI:
+
+```sh
+whatcable --silence-pro-hints
+```
