@@ -36,6 +36,61 @@ MacOS package manager
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
+## [Vorssaint](https://github.com/vorssaint/vorssaint-utils)
+
+One menu bar icon doing the job of a dozen paid Mac apps.
+Free, open source, and local-first.
+
+```sh
+brew install --cask vorssaint
+```
+
+Configs (in Vorssaint settings):
+
+- General:
+  - Enable **Launch at login**.
+  - Appearance: System.
+- Features (enable the following):
+  - Maximize windows.
+  - Window layout.
+  - Quit on close.
+  - Cut & paste.
+  - Volume mixer.
+  - Music app blocker.
+  - Displays.
+  - Extra brightness.
+  - Copy text from screen.
+  - Media.
+  - Cleaner.
+  - Uninstaller.
+  - Homebrew.
+  - App updates.
+  - Screenshot.
+  - Scratchpad.
+  - Command bar.
+  - Port manager.
+  - Everything under System monitor.
+- Volume mixer -> Options -> Enable **Use finer volume steps**.
+- Displays -> More options -> Enable **Brightness keys follow the pointer** & **Show brightness when adjusting**.
+- App updates:
+  - Check in the background: Every day.
+- Screenshot:
+  - More options -> Enable **Start selection with the magnifier on**.
+  - Temporary links -> Disable **Allow temporary links**.
+- Scratchpad -> Enable **Global shortcut**.
+- Command bar.
+  - Enable **Global shortcut to open the bar**.
+  - Shortcut: CMD + Space.
+- Monitor:
+  - Enable **CPU**, **CPU temperature**, **Memory**, and **Network**.
+  - Enable **Pressure dot**.
+  - Enable **Upload above download**.
+  - Enable **Combine usage and temperature**.
+  - Menu bar spacing: standard.
+  - Enable **Hide the app icon while metrics are shown**.
+- About.
+  - Enable **Check for updates automatically**.
+
 ## [Watch](https://en.wikipedia.org/wiki/Watch_(command))
 
 Runs a specified command repeatedly
@@ -51,24 +106,6 @@ Interacts with S3 buckets, and general AWS services
 ```sh
 brew install awscli
 ```
-
-## [Rectangle](https://rectangleapp.com/)
-
-Provides window snapping and resizing, and keyboard shortcuts to move and resize windows
-
-```sh
-brew install --cask rectangle
-```
-
-To ensure that windows take their full available space, set the following settings:
-
-- Gaps between windows - 0 px
-- Stage manager recent apps area - 0px
-
-Also set:
-
-- Launch on login
-- Check for updates automatically
 
 ## [ripgrep](https://ripgrep.org/)
 
@@ -195,14 +232,6 @@ Mac App Store command-line interface
 
 ```sh
 brew install mas
-```
-
-## [MonitorControl](https://github.com/MonitorControl/MonitorControl)
-
-Controls external display brightness
-
-```sh
-brew install --cask monitorcontrol
 ```
 
 ## [LocalSend](https://localsend.org/)
