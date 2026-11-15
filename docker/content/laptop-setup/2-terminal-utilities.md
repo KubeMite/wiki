@@ -14,6 +14,26 @@ A better terminal emulator for MacOS
 
 Download from here: [https://iterm2.com/downloads.html](https://iterm2.com/downloads.html)
 
+## sudo authentication with Touch ID
+
+You can also enable sudo authentication with Touch ID by creating the following file **/etc/pam.d/sudo_local** with permissions **444**, owner **root** and group **wheel**:
+
+```sh
+sudo touch /etc/pam.d/sudo_local
+sudo chmod 444 /etc/pam.d/sudo_local
+sudo chown root:wheel /etc/pam.d/sudo_local
+```
+
+In the file **/etc/pam.d/sudo_local** put the following:
+
+```text
+# sudo_local: local config file which survives system update and is included for sudo
+# uncomment following line to enable Touch ID for sudo
+auth       sufficient     pam_tid.so
+```
+
+Now you will have sudo authentication with Touch ID!
+
 ## oh-my-zsh
 
 An open-source framework for managing ZSH configuration
